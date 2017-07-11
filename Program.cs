@@ -18,24 +18,23 @@ namespace expression_members
         public ICollection<string> Prey { get; } = new List<string>();
 
         // Convert this readonly property to an expression member
-        public string FormalName => $"{Name}, {Species}";
-   
+        public string FormalName =>  $"{this.Name} the {this.Species}";
 
         // Class constructor
         public Bug(string name, string species, List<string> predators, List<string> prey)
         {
             this.Name = name;
             this.Species = species;
-            this.Predators.Concat(predators);
-            this.Prey.Concat(prey);
+            this.Predators = predators;
+            this.Prey = prey;
         }
 
         // Convert this method to an expression member
-        public string PreyList() => $", {this.Prey}";
+        public string PreyList => string.Join(",", this.Prey);
   
 
         // Convert this method to an expression member
-        public string PredatorList()=> $", {this.Predators}";
+        public string PredatorList => string.Join(",", this.Predators);
   
 
         // Convert this to expression method (hint: use a C# ternary)
@@ -48,7 +47,12 @@ namespace expression_members
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+       Bug mantis = new Bug("Manny", "Mantis", new List<string>(){"Aphids"}, new List<string>(){"Aphids"});
+       Bug beatle = new Bug("John Lennon", "Human", new List<string>(){"Mark David Chapman"}, new List<string>(){"Yoko Ono", "The Beatles"});
+
+      
+       Console.WriteLine(beatle.Eat("Paul Mcartney"));
+
         }
     }
 }
